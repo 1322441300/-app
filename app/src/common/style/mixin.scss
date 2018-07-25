@@ -1,0 +1,40 @@
+// 1像素边框
+@mixin border-1px($color) {
+  position: relative;
+  &::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid $color;
+    content: '';
+    //随物理像素比例的不同，进行变化，确保是1像素
+    @media (-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5){
+      -webkit-transform: scaleY(0.7);
+      transform: scaleY(0.7);
+    }
+    @media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+// 去掉1px边框(上面的1px是通过display：block实现的)
+@mixin border-none() {
+  &::after {
+    display: none;
+  }
+}
+
+
+// 处理2x和3x的图片
+@mixin bg-image($url) {
+  background-image: url($url + "@2x.png");
+  @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+    background-image: url($url + "@3x.png")
+  }
+}
+
+
