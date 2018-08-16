@@ -1,8 +1,11 @@
 <template>
   <div class="">
-    <headPage :title="typeString"></headPage>
+    <headPage :isBack="isBack" :title="title"></headPage>
     <div style="height:45px;"></div>
-    休息中哈哈哈哈
+    <div class="closeStatus">
+      茶馆休息中
+      <p>请营业时间再来哦</p>
+    </div>
   </div>
 </template>
 
@@ -11,8 +14,8 @@ import headPage from '@/components/headPage';
 export default {
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App   heheh',
-      typeString: ''
+      isBack: true,
+      title: '茶馆休息中'
     }
   },
   components: {
@@ -21,5 +24,11 @@ export default {
 }
 </script>
 
-<style lang="css">
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss">
+.closeStatus{
+  padding:30px 0;
+  font-size: 18px;
+  line-height: 40px;
+}
 </style>

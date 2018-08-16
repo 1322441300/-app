@@ -1,6 +1,6 @@
 <template>
   <div class="topWrap clearfix pf">
-    <div class="goBack pa" @click="$router.back(-1)">
+    <div v-show="isBack" class="goBack pa" @click="$router.back(-1)">
       <img src="@/assets/back.png" class="fl">
     </div>
     <h1>{{title}}</h1>
@@ -10,6 +10,7 @@
 <script>
 export default {
   props: {
+    isBack: Boolean,
     title: String,
     required: true
   },
@@ -28,9 +29,11 @@ export default {
     height: 44px;
     padding: 0 10px;
     background-color: #fff;
+    box-shadow:0 0 5px #ccc;
     text-align: center;
     top:0;
     left: 0;
+    z-index:999;
     .goBack{
       width:44px;
       height: 44px;

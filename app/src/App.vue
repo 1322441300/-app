@@ -6,7 +6,24 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+  },
+  created () {
+    document.documentElement.addEventListener('touchstart', function (event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, false);
+    var lastTouchEnd = 0;
+    document.documentElement.addEventListener('touchend', function (event) {
+      var now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  }
 };
 </script>
 
@@ -52,6 +69,7 @@ img{border: none;}
 .wordwrap { word-break: break-all; word-wrap: break-word; }
 
 .omg{overflow: hidden; text-overflow: ellipsis; white-space:nowrap;}
+.shadowWrap{box-shadow:0 0 5px #ccc;}
 
 .wrap{ width: 100%; margin: 0 auto; box-sizing: border-box;}
 .fa{ font-family: Arial !important;}

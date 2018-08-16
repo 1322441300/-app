@@ -1,42 +1,42 @@
 <template>
   <div class="teaLink">
     <ul class="teaLinkList clearfix">
-      <li @click="goTeaHouse('原油茶馆')" class="fl">
+      <li @click="goTeaHouse('原油茶馆', '1')" class="fl">
         <div class="rond rond1">
           <div class="test"></div>
         </div>
         <img src="@/assets/yy.png">
         <div class="">原油茶馆</div>
       </li>
-      <li @click="goTeaHouse('股指茶馆')" class="qli fl">
+      <li @click="goTeaHouse('股指茶馆', '2')" class="qli fl">
         <div class="rond rond2">
           <div class="test"></div>
         </div>
         <img src="@/assets/gp.png">
         <div class="">股指茶馆</div>
       </li>
-      <li @click="goTeaHouse('外汇茶馆')" class="fl">
+      <li @click="goTeaHouse('外汇茶馆', '3')" class="fl">
         <div class="rond rond3">
           <div class="test"></div>
         </div>
         <img src="@/assets/wh.png">
         <div class="">外汇茶馆</div>
       </li>
-      <li @click="goTeaHouse('贵金属茶馆')" class="fl">
+      <li @click="goTeaHouse('贵金属茶馆', '4')" class="fl">
         <div class="rond rond4">
           <div class="test"></div>
         </div>
         <img src="@/assets/gjs.png">
         <div class="">贵金属茶馆</div>
       </li>
-      <li @click="goTeaHouse('利率茶馆')" class="qli fl">
+      <li @click="goTeaHouse('利率茶馆', '5')" class="qli fl">
         <div class="rond rond5">
           <div class="test"></div>
         </div>
         <img src="@/assets/lv.png">
         <div class="">利率茶馆</div>
       </li>
-      <li @click="goTeaHouse('虚拟币茶馆')" class="fl">
+      <li @click="goTeaHouse('虚拟币茶馆', '6')" class="fl">
         <div class="rond rond6">
           <div class="test"></div>
         </div>
@@ -49,11 +49,13 @@
 </template>
 
 <script>
+import { getCookie, checkPhone } from '@/common/utils/utilsPublic';
+
 export default {
   name: 'teaLink',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App   heheh',
+      userPhone: '',
       currentStatus: 'goIndex'
     }
   },
@@ -65,22 +67,33 @@ export default {
     //     this.currentStatus = currentStatus;
     //   }
     // },
-    goTeaHouse: function (type) {
-      this.$router.push({
-        path: 'teaHouse',
-        query: {
-          typeString: type
-        }
-      });
+    getUserInfo () {
+      let userPhone = getCookie().userPhone;
+      this.userPhone = userPhone;
+    },
+    goTeaHouse: function (type, id) {
+      console.log(this.userPhone);
+      if (checkPhone(this.userPhone)) {
+        this.$router.push({
+          path: 'teaHouse',
+          query: {
+            typeString: type,
+            menuId: id
+          }
+        });
+      } else {
+        this.$router.push({
+          path: 'login',
+          query: {
+            currentStatus: 'goIndex',
+            pathUrl: 'index'
+          }
+        });
+      }
     }
-    // get() {
-    //   this.$ajax.post(AjaxUrl.test).then((response) => {
-    //     console.log(response);
-    //   });
-    // }
   },
   created() {
-    // this.getCurrentStatus();
+    this.getUserInfo();
   }
 };
 </script>

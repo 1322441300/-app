@@ -28,6 +28,7 @@
 
 <script>
 // import {AjaxUrl} from '../common/ajax/serverPublic';
+import { getCookie } from '@/common/utils/utilsPublic';
 export default {
   name: 'bottomNav',
   data () {
@@ -39,21 +40,10 @@ export default {
   methods: {
     getCurrentStatus: function() {
       let currentStatus = this.$route.query.currentStatus;
-      console.log(currentStatus);
+      // console.log(currentStatus);
       if (currentStatus) {
         this.currentStatus = currentStatus;
       }
-      // this.error = this.post = null
-      // this.loading = true
-      // // replace `getPost` with your data fetching util / API wrapper
-      // getPost(this.$route.params.id, (err, post) => {
-      //   this.loading = false
-      //   if (err) {
-      //     this.error = err.toString()
-      //   } else {
-      //     this.post = post
-      //   }
-      // })
     },
     goIndex: function () {
       this.$router.push({
@@ -80,12 +70,23 @@ export default {
       });
     },
     goMine: function() {
-      this.$router.push({
-        path: 'mine',
-        query: {
-          currentStatus: 'goMine'
-        }
-      });
+      let loginStatus = getCookie().userPhone;
+      if (loginStatus) {
+        this.$router.push({
+          path: 'mine',
+          query: {
+            currentStatus: 'goMine'
+          }
+        });
+      } else {
+        this.$router.push({
+          path: 'login',
+          query: {
+            currentStatus: 'goMine',
+            pathUrl: 'mine'
+          }
+        });
+      }
     }
     // get() {
     //   this.$ajax.post(AjaxUrl.test).then((response) => {

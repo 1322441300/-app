@@ -1,6 +1,59 @@
 // const API_HOST = 'http://47.52.253.6:8080';
 export const AjaxUrl = {
+  // 获取banner接口
   getBanners: '/home/getAllBanners',
+  // 首页菜单接口
+  getMenu: '/menu/menus',
+  // 获取新闻快讯标题
+  allNewsTitle: '/news/allNewsTitle',
+  // 获取新闻快讯内容
+  newsDetail: '/news/newsDetail',
+  // 获取行情标题
+  queryFuturesDataTitle: '/futuresData/queryFuturesDataTitle',
+  // 获取行情详情
+  queryFuturesData: '/futuresData/queryFuturesData',
+  // 获取茶馆接口
+  getTeaRoom: '/tea/room',
+  // 获取茶话&聊天记录
+  queryWeChatLog: '/tea/queryWeChatLog',
+  // 发送茶话消息
+  sendMsg: '/tea/sendMsg',
+  // 关注茶话
+  follow: '/tea/follow',
+  // 取消关注茶话
+  cancelFollow: '/tea/cancelFollow',
+  // 新开茶馆接口
+  openRoom: '/tea/openRoom',
+  // 新茶馆预告
+  newTeaRoomHerald: '/menu/newTeaRoomHerald',
+  // 新茶馆预约
+  subscribe: '/menu/subscribe',
+  // 新茶馆取消预约
+  unsubscribe: '/menu/unsubscribe',
+  // 茶话主题投票
+  getAllChatterbox: '/tea/getAllChatterbox',
+  // 投票支持
+  voteTicket: '/tea/voteTicket',
+  // 创建话题
+  createChatterbox: '/tea/createChatterbox',
+  // 获取所有省份
+  province: '/menu/province',
+  // 线下开茶馆
+  openOffLineTea: '/menu/openOffLineTea',
+  // 获取用户信息
+  getUserInfo: '/home/getUserByMobileNo',
+  // 获取用户关注
+  myFollow: '/tea/myFollow',
+  // 获取用户预约
+  myHerald: '/menu/myHerald',
+  // 意见反馈
+  feedback: '/home/feedback',
+  // 登录接口
   loginAPI: '/home/login',
-  registerAPI: '/home/register'
+  // 注册接口
+  registerAPI: '/home/register',
+  // 修改密码
+  modifyPwd: '/home/modifyPwd',
+  // 重置密码
+  resetPwd: '/home/resetPwd'
 };

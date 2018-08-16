@@ -14,16 +14,19 @@ export default {
     }
   },
   props: {
-    typeString: String
+    typeString: String,
+    menuId: String
   },
   methods: {
     openTeaHouse: function(type) {
-      console.log(type);
+      // console.log(type);
+      // console.log(this.menuId);
       // 申请开通新茶馆的接口
       this.$router.push({
         path: 'newTeaHouse',
         query: {
-          typeString: type
+          typeString: type,
+          menuId: this.menuId
         }
       });
     }

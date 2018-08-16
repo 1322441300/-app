@@ -1,60 +1,20 @@
 <template>
   <div class="cellTea">
-    <!-- {{typeString}} -->
     <ul class="cellList">
-      <li class="cellIn pr clearfix">
+      <li class="cellIn pr clearfix" v-for="cellData in cellDatas" :key="cellData.id" @click="goNext(cellData.titleStatus,cellData.titleName,cellData.id)">
         <div class="leftWrap pa">
-          <img src="http://img0.imgtn.bdimg.com/it/u=1392397647,998339823&fm=27&gp=0.jpg">
+          <img :src="cellData.tltleImagePath">
         </div>
         <div class="rightWrap pr">
-          <h3 class="omg">星期三茶馆，专聊原油嗨起来哈哈哈</h3>
+          <h3 class="omg">{{cellData.titleName}}</h3>
           <div class="concernNum pa">
-            关注茶友139人
+            关注茶友{{cellData.followNum}}人
           </div>
-          <div class="teaStatus pa">
+          <div class="teaStatus teaStatusing pa" v-if="cellData.titleStatus == '1'">
             营业中
           </div>
-        </div>
-      </li>
-      <li class="cellIn pr clearfix">
-        <div class="leftWrap pa">
-          <img src="http://img0.imgtn.bdimg.com/it/u=1392397647,998339823&fm=27&gp=0.jpg">
-        </div>
-        <div class="rightWrap pr">
-          <h3 class="omg">星期三茶馆，专聊原油嗨起来哈哈哈</h3>
-          <div class="concernNum pa">
-            关注茶友139人
-          </div>
-          <div class="teaStatus pa">
-            营业中
-          </div>
-        </div>
-      </li>
-      <li class="cellIn pr clearfix">
-        <div class="leftWrap pa">
-          <img src="http://img0.imgtn.bdimg.com/it/u=1392397647,998339823&fm=27&gp=0.jpg">
-        </div>
-        <div class="rightWrap pr">
-          <h3 class="omg">星期三茶馆，专聊原油嗨起来哈哈哈</h3>
-          <div class="concernNum pa">
-            关注茶友139人
-          </div>
-          <div class="teaStatus pa">
-            营业中
-          </div>
-        </div>
-      </li>
-      <li class="cellIn pr clearfix">
-        <div class="leftWrap pa">
-          <img src="http://img0.imgtn.bdimg.com/it/u=1392397647,998339823&fm=27&gp=0.jpg">
-        </div>
-        <div class="rightWrap pr">
-          <h3 class="omg">星期三茶馆，专聊原油嗨起来哈哈哈</h3>
-          <div class="concernNum pa">
-            关注茶友139人
-          </div>
-          <div class="teaStatus pa">
-            营业中
+          <div class="teaStatus teaStatused pa" v-if="cellData.titleStatus == '2'">
+            休息中
           </div>
         </div>
       </li>
@@ -70,7 +30,29 @@ export default {
     }
   },
   props: {
-    typeString: String
+    typeString: String,
+    menuId: String,
+    cellDatas: Array
+  },
+  methods: {
+    goNext (status, titleName, id) {
+      if (status === '1') {
+        // console.log('营业中');
+        this.$router.push({
+          path: 'openStatus',
+          query: {
+            id: id,
+            titleName: titleName
+          }
+        })
+      } else if (status === '2') {
+        this.$router.push({
+          path: 'closeStatus'
+        })
+      } else {
+        console.log('shenhezhong');
+      }
+    }
   }
 }
 </script>
@@ -95,6 +77,7 @@ export default {
           top: 10px;
           img{
             width: 100px;
+            height: 100px;
             border-radius: 4px;
           }
         }
@@ -107,19 +90,39 @@ export default {
             font-size: 18px;
             font-weight: normal;
             line-height: 26px;
+            text-align: left;
           }
           .concernNum{
-            font-size: 16px;
+            font-size: 15px;
             bottom: 12px;
             left: 0;
           }
-          .teaStatus{
+          .teaStatusing{
             width: 80px;
             height: 38px;
             border-radius: 4px;
-            border:1px solid #6e9ceb;
+            // border:1px solid #6e9ceb;
             background-color: #6e9ceb;
             color: #fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 36px;
+            right: 0;
+            bottom:2px;
+            animation: top 1s linear infinite;
+            @keyframes top{
+              0%{background-color: #57b;}
+              80%{background-color: #6e9ceb;}
+              100%{background-color: #1E8FE0;}
+            }
+          }
+          .teaStatused{
+            width: 80px;
+            height: 38px;
+            border-radius: 4px;
+            // border:1px solid #f2f2f2;
+            background-color: #f2f2f2;
+            color: #666;
             font-size: 16px;
             text-align: center;
             line-height: 36px;

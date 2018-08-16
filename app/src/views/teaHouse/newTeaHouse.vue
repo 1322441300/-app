@@ -1,29 +1,40 @@
 <template>
   <div class="newTeaHouse">
-    <headPage :title="typeString"></headPage>
+    <headPage :isBack="isBack" :title="typeString"></headPage>
     <div style="height:45px;"></div>
-    新建茶馆
-
+    <openForm :menuId="menuId"></openForm>
   </div>
 </template>
 
 <script>
 import headPage from '@/components/headPage';
+import openForm from '@/components/teaHouse/openForm';
+
 export default {
   data () {
     return {
-      // typeString:''
-      // swiperOption:{}
+      isBack: true,
+      typeString: '',
+      menuId: ''
     }
   },
   props: {
-    typeString: String
+    // typeString: String
   },
   components: {
-    headPage: headPage
+    headPage: headPage,
+    openForm: openForm
+  },
+  methods: {
+    getUrlInfo: function() {
+      let typeString = this.$route.query.typeString;
+      let menuId = this.$route.query.menuId;
+      this.typeString = '新开' + typeString;
+      this.menuId = menuId;
+    }
   },
   created() {
-    console.log(this.typeString);
+    this.getUrlInfo();
   }
 }
 </script>
